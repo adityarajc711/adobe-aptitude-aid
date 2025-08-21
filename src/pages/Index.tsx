@@ -1,14 +1,47 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from 'react';
+import { User } from '@/types/assessment';
+import { AssessmentLogin } from '@/components/AssessmentLogin';
+import { AssessmentInstructions } from '@/components/AssessmentInstructions';
+import { AssessmentContainer } from '@/components/AssessmentContainer';
+
+type AppState = 'login' | 'instructions' | 'assessment';
 
 const Index = () => {
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
-    </div>
-  );
+  const [appState, setAppState] = useState<AppState>('login');
+  const [user, setUser] = useState<User | null>(null);
+
+  const handleLogin = (userData: User) => {
+    setUser(userData);
+    setAppState('instructions');
+  };
+
+  const handleStartAssessment = () => {
+    setAppState('assessment');
+  };
+
+  const handleBackToLogin = () => {
+    setAppState('login');
+    setUser(null);
+  };
+
+  if (appState === 'login') {
+    return <AssessmentLogin onLogin={handleLogin} />;
+  }
+
+  if (appState === 'instructions') {
+    return (
+      <AssessmentInstructions 
+        onStart={handleStartAssessment}
+        onBack={handleBackToLogin}
+      />
+    );
+  }
+
+  if (appState === 'assessment' && user) {
+    return <AssessmentContainer user={user} />;
+  }
+
+  return null;
 };
 
 export default Index;
