@@ -220,6 +220,7 @@ export function AssessmentContainer({ user }: AssessmentContainerProps) {
         onStopCamera={handleStopCamera}
         onSubmit={handleSubmit}
         videoRef={camera.videoRef}
+        user={user}
       />
 
       {/* Progress Bar */}

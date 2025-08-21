@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Timer, Camera, CameraOff } from 'lucide-react';
+import { Timer, Camera, CameraOff, User as UserIcon } from 'lucide-react';
+import { User } from '@/types/assessment';
 
 interface AssessmentHeaderProps {
   secondsLeft: number;
@@ -11,6 +12,7 @@ interface AssessmentHeaderProps {
   onStopCamera: () => void;
   onSubmit: () => void;
   videoRef: React.RefObject<HTMLVideoElement>;
+  user: User;
 }
 
 export function AssessmentHeader({
@@ -20,7 +22,8 @@ export function AssessmentHeader({
   onStartCamera,
   onStopCamera,
   onSubmit,
-  videoRef
+  videoRef,
+  user
 }: AssessmentHeaderProps) {
   const formatTime = (seconds: number) => {
     const h = Math.floor(seconds / 3600).toString().padStart(2, '0');
@@ -33,13 +36,24 @@ export function AssessmentHeader({
 
   return (
     <div className="flex items-center justify-between gap-4 p-4 bg-card border-b border-border">
-      <div className="flex items-center gap-3">
-        <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center text-primary-foreground font-bold text-xl">
-          A
+      <div className="flex items-center gap-6">
+        <div className="flex items-center gap-3">
+          <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center text-primary-foreground font-bold text-xl">
+            A
+          </div>
+          <div>
+            <h1 className="text-lg font-bold">Adobe General Assessment</h1>
+            <p className="text-sm text-muted-foreground">Proctored • General Aptitude & Judgment</p>
+          </div>
         </div>
-        <div>
-          <h1 className="text-lg font-bold">Adobe General Assessment</h1>
-          <p className="text-sm text-muted-foreground">Proctored • General Aptitude & Judgment</p>
+        
+        {/* User Information */}
+        <div className="flex items-center gap-2 px-3 py-2 bg-muted rounded-lg border">
+          <UserIcon className="w-4 h-4 text-muted-foreground" />
+          <div className="text-sm">
+            <div className="font-medium">{user.name}</div>
+            <div className="text-xs text-muted-foreground">{user.email}</div>
+          </div>
         </div>
       </div>
 
