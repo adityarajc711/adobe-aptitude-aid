@@ -56,68 +56,48 @@ export function AssessmentLogin({ onLogin }: AssessmentLoginProps) {
           </div>
         </CardHeader>
         
-        <CardContent className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <div>
-            <form onSubmit={handleLogin} className="space-y-4">
-              <div>
-                <Label htmlFor="email">Email Address</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email"
-                  required
-                  className="mt-1"
-                />
-              </div>
-              
-              <div>
-                <Label htmlFor="password">Password</Label>
-                <Input
-                  id="password"
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Enter your password"
-                  required
-                  className="mt-1"
-                />
-              </div>
-
-              {error && (
-                <Alert variant="destructive">
-                  <AlertDescription>{error}</AlertDescription>
-                </Alert>
-              )}
-
-              <Button 
-                type="submit" 
-                className="w-full" 
-                disabled={isLoading}
-              >
-                {isLoading ? 'Logging in...' : 'Login to Assessment'}
-              </Button>
-            </form>
-          </div>
-
-          <div className="bg-muted p-6 rounded-lg border">
-            <h3 className="font-semibold mb-3">Demo Accounts (For Testing)</h3>
-            <div className="space-y-2 text-sm text-muted-foreground">
-              <div className="p-2 bg-background rounded border">
-                <div className="font-mono">atabhishek.tiwari1997@gmail.com</div>
-                <div className="font-mono">Abhi@1997</div>
-              </div>
-              <div className="p-2 bg-background rounded border">
-                <div className="font-mono">Himanshujharaniya1995@gmail.com</div>
-                <div className="font-mono">Himu@1995</div>
-              </div>
-              <div className="p-2 bg-background rounded border">
-                <div className="font-mono">Adityarajc7@yahoo.com</div>
-                <div className="font-mono">Adi@2000</div>
-              </div>
+        <CardContent className="max-w-md mx-auto">
+          <form onSubmit={handleLogin} className="space-y-4">
+            <div>
+              <Label htmlFor="email">Email Address</Label>
+              <Input
+                id="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email"
+                required
+                className="mt-1"
+              />
             </div>
-          </div>
+            
+            <div>
+              <Label htmlFor="password">Password</Label>
+              <Input
+                id="password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Enter your password"
+                required
+                className="mt-1"
+              />
+            </div>
+
+            {error && (
+              <Alert variant="destructive">
+                <AlertDescription>{error}</AlertDescription>
+              </Alert>
+            )}
+
+            <Button 
+              type="submit" 
+              className="w-full" 
+              disabled={isLoading}
+            >
+              {isLoading ? 'Logging in...' : 'Login to Assessment'}
+            </Button>
+          </form>
         </CardContent>
       </Card>
     </div>
